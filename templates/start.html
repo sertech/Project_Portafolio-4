@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bus Control App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <!--  for social media buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/newFormat.css') }}">
+    
+    <script>
+            function startTime(){
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checktime(m);
+                s = checktime(s);
+                var weekday = new Array(7);
+                weekday[0] = "Domingo";
+                weekday[1] = "Lunes";
+                weekday[2] = "Martes";
+                weekday[3] = "Miercoles";
+                weekday[4] = "Jueves";
+                weekday[5] = "Viernes";
+                weekday[6] = "Sabado";
+                var n = weekday[today.getDay()];
+                document.getElementById('cTime').innerHTML = n + ": " + h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 500);
+            }
+            function checktime(i){
+                if (i < 10){
+                    i = "0" + i; // add zero in front of number < 10
+                }
+                return i;
+            }
+    </script>
+
+</head>
+
+<body onload="startTime()">
+    <div class="header">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('mainPage')}}">Bus Control App</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('ParadasPage')}}">Paradas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('busesPage')}}">Buses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('repDate')}}">Reporte por fecha</a>
+                </li>
+            </ul>
+            <span class="navbar-text" id="cTime">
+                    Navbar text
+            </span>
+            
+        </nav>        
+    </div>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    
+</body>
+
+</html>

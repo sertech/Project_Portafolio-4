@@ -1,0 +1,71 @@
+{% extends "start.html" %}
+{% block content %}
+<h1>Edicion de paradas</h1>
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body">
+                <h4 class="card-title">Tool Tip</h4>
+                <p class="card-text">Esta a punto de Editar la parada:</p>
+                <dl>
+                    <dt>Direccion IP</dt>
+                    <dd>- {{appParada.parada_Ip}}</dd>
+                    <dt>Nombre</dt>
+                    <dd>- {{appParada.parada_nombre}}</dd>                    
+                    <dt>Hora de LLegada</dt>
+                    <dd>- {{appParada.parada_Time}}</dd>
+                    <dt>Descripcion de la Parada</dt>
+                    <dd>- {{appParada.parada_desc}}</dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm-6">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <h4 class="card-title">Edicion de Paradas</h4>
+                <form action="{{url_for('editParada',paradaIp=appParada.parada_Ip)}}" method="POST">
+                    <div class="form-group">
+                        <!-- Parada IP -->
+                        <label for="nIp">Nuevo IP</label>
+                        <input type="text" class="form-control" id="nIp" placeholder="FORMATO: 0.0.0.0" name="newParadaIp"
+                            required>
+                        <!-- Parada Time -->
+                        <label for="nTime">Nueva hora de llegada</label>
+                        <input type="text" class="form-control" id="nTime" placeholder="FORMATO: 00:00:00 de 24 Horas"
+                            name="newParadaTime" required>
+                        <!-- Parada Nombre -->
+                        <label for="nNombre">Nuevo Nombre de Parada</label>
+                        <input type="text" class="form-control" id="nNombre" placeholder="nuevo nombre" name="newParadaName"
+                            required>
+                        <!-- Parada Description -->
+                        <label for="nDesc">Nueva Descripcion de Parada</label>
+                        <label for="paradaDesc">New item description</label>
+                        <textarea id="nDesc" cols="70" rows="6" class="form-control" placeholder="Descripcion....."
+                            name="newParadaDesc" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body">
+                <h4 class="card-title">Borrar Parada</h4>
+                <p class="card-text">Esta accion no se puede revertir</p>
+                
+                <form action="{{url_for('deleteParada', paradaIp=appParada.parada_Ip)}}" method="POST">
+                    <button type="submit" class="btn btn-danger">Borrar Parada</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

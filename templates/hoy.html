@@ -1,0 +1,81 @@
+{% extends "start.html"%}
+{%  block content %}
+
+<h2>Reporte de Hoy</h2>
+<div class="row">
+    <div class="col-sm-2">
+        <h3>Tool Tip</h3>
+        <p>Est voluptate irure ea pariatur veniam aliqua elit magna pariatur velit eu aliqua eiusmod nostrud. Tempor
+            sint labore tempor sit dolor magna veniam. Laborum dolor eiusmod in eiusmod nulla dolore ut ut id.</p>
+    </div>
+    <div class="col-sm-10">
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Bus Placa</th>
+                    <th>Nombre de Parada</th>
+                    <th>Hora de Pase</th>
+                    <th>Fecha de Pase</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for today in apphoy %}
+                    <tr>
+                        <td>
+                            <div class="alert alert-info">
+                                {% for bus in appBuses %}
+                                    {% if bus.id == today.bus_id %}
+                                        {{bus.bus_Placa}}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>                        
+                        </td>
+                        <td>
+                            <div class="alert alert-info">
+                                {% for parada in appParadas %}
+                                    {% if parada.id == today.parada_id %}
+                                        {{parada.parada_nombre}}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="alert alert-info">
+                                {{today.pase_hora}}
+                            </div>                            
+                        </td>
+                        <td>
+                            <div class="alert alert-info">
+                                {{today.pase_fecha}}
+                            </div>
+                            
+                        </td>
+                        <td>
+                            {% if today.resultado == 'ADELANTADO' %}
+                                <div class="alert alert-warning">
+                                    {{today.resultado}}
+                                </div>                                
+                            {% endif %}
+                            {% if today.resultado == 'A TIEMPO' %}
+                                <div class="alert alert-success">
+                                    {{today.resultado}}
+                                </div>                                
+                            {% endif %}
+                            {% if today.resultado == 'ATRASO' %}
+                                <div class="alert alert-danger">
+                                    {{today.resultado}}
+                                </div>                                
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

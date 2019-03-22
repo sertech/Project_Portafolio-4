@@ -1,0 +1,63 @@
+{% extends "start.html" %}
+{% block content %}
+<h1>Edicion de Bus</h1>
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body">
+                <h4 class="card-title">Tool Tip</h4>
+                <p class="card-text">Esta a punto de Editar el Bus:</p>
+                <dl>
+                    <dt>Codigo RDFI del bus</dt>
+                    <dd>- {{appBus.bus_Hex}}</dd>
+                    <dt>Placa del Bus</dt>
+                    <dd>- {{appBus.bus_Placa}}</dd>                    
+                    <dt>Chofer del Bus</dt>
+                    <dd>- {{appBus.bus_chofer}}</dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm-6">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <h4 class="card-title">Edicion de Buses</h4>
+                <form action="{{url_for('editBus', busPlaca=appBus.bus_Placa)}}" method="POST">
+                    <div class="form-group">
+                        <!-- Parada IP -->
+                        <label for="nRDFI">Nuevo identificador RDFI</label>
+                        <input type="text" class="form-control" id="nRDFI" placeholder="FORMATO: numero hexadecimal" maxlength="15" name="nRDFI"
+                            required>
+                        <!-- Parada Time -->
+                        <label for="nPlaca">Nueva placa para el bus</label>
+                        <input type="text" class="form-control" id="nPlaca" placeholder="FORMATO: 0000ABC" maxlength="7" name="nPlaca" required>
+                        <!-- Parada Nombre -->
+                        <label for="nChofer">Nuevo chofer del bus</label>
+                        <input type="text" class="form-control" id="nChofer" placeholder="nuevo nombre apellido materno apellido paterno" name="nChofer" maxlength="100" required>
+                        <!-- Parada Description -->
+                        
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body">
+                <h4 class="card-title">Borrar Bus</h4>
+                <p class="card-text">Esta accion no se puede revertir</p>
+                
+                <form action="{{url_for('deleteBus', busPlaca=appBus.bus_Placa)}}" method="POST">
+                    <button type="submit" class="btn btn-danger">Borrar Bus</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

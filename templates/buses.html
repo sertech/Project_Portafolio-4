@@ -1,0 +1,98 @@
+{% extends "start.html" %}
+{% block content %}
+
+<h2>Listas de Buses</h2>
+<div class="row">
+    <div class="col-sm-3">
+        <h3>Tool Tip</h3>
+        <p>
+            Para adicionar un nuevo Bus solo es necesario hacer click en el boton crear bus
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paradaModal">
+        nuevo Bus</button>
+        <br><br>
+        <p>
+            Para editar un Bus existente hacer click en el nombre de esa parada
+        </p>
+        <!-- modal section -->
+        <div class="modal fade" id="paradaModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- modal header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            Adicion de nuevo Bus
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- modal body -->
+                    <div class="modal-body">
+
+                        <div class="alert alert-info">
+                                <strong>Info!</strong> Ingresar los datos en los formatos presentados dentro de las cajas de texto
+                        </div>
+                        <hr class="style1">
+                        <span class="border-top my-3"></span>
+                        <form action="{{url_for('newBus')}}" method="post">
+                            <div class="form-group">
+                                <label for="busHex">RDFI de bus</label>
+                                <input type="text" class="form-control" id="busHex" placeholder="123456789ABCDEF" name="busHex" maxlength="15">
+
+                                <label for="placaBus">Placa de Bus</label>
+                                <input type="text" class="form-control" id="placaBus" placeholder="9999ABC" name="placaBus" maxlength="7">
+
+                                <label for="choferBus">Nombre del conductor del Bus</label>
+                                <input type="text" class="form-control" id="choferBus" placeholder="nombre apellido paterno apellido materno" name="choferBus">
+                                
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                        
+                    </div>
+
+                    <!-- modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <!--  end of modal section  -->
+    </div>
+    <div class="col-sm-9">
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>RDFI de Bus</th>
+                    <th>Placa de Bus</th>
+                    <th>Chofer de Bus</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bus in appBuses %}
+                <tr>
+                    <td>
+                        {{bus.id}}
+                    </td>
+
+                    <td>
+                        {{bus.bus_Hex}}
+                    </td>
+                    <td>
+                        <a href="{{url_for('editBus', busPlaca=bus.bus_Placa)}}" data-toggle="tooltip" data-placement="right" title="Editar | Borrar">{{bus.bus_Placa}}</a>  
+                    </td>
+                    <td>
+                        {{bus.bus_chofer}}
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endblock %}
