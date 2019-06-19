@@ -153,6 +153,11 @@ def repDate():
         print('this is the GET response so goes first')
         return render_template('reporteFecha.html')
 
+@app.route('/Frecuencias', methods=['GET', 'POST'])
+def frequencies():
+    return render_template('frecuencias.html')
+
+
 @app.route('/busrecord/JSON/allBuses')
 def allBusesCat():
     buses = session.query(Bus).all()

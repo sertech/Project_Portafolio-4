@@ -51,17 +51,17 @@
                             
                         </td>
                         <td>
-                            {% if today.resultado == 'ADELANTADO' %}
+                            {% if today.resultado == 'Adelantado' %}
                                 <div class="alert alert-warning">
                                     {{today.resultado}}
                                 </div>                                
                             {% endif %}
-                            {% if today.resultado == 'A TIEMPO' %}
+                            {% if today.resultado == 'A tiempo' %}
                                 <div class="alert alert-success">
                                     {{today.resultado}}
                                 </div>                                
                             {% endif %}
-                            {% if today.resultado == 'ATRASO' %}
+                            {% if today.resultado == 'Atrasado' %}
                                 <div class="alert alert-danger">
                                     {{today.resultado}}
                                 </div>                                
